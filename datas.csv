@@ -1,0 +1,17 @@
+instruccion,accion
+"Realiza una búsqueda en internet","Buscar en Google"
+"Envía un mensaje a un amigo","Enviar mensaje por WhatsApp"
+"Reproduce una canción","Reproducir música en Spotify"
+"Busca una receta de pizza, elige una y envíamela por correo electrónico","Buscar receta de pizza y enviarla por correo"
+"Hacer algo","Acción no reconocida"
+"Cuentame un chiste","Buscar un chiste en Google"
+"Que hora es", "Abrir aplicacion de Reloj"
+"Quiero hacer una foto", "Abre la aplicacion de Camara"
+"Llama a papa", "Abre la aplicacion de contactos busca el contacto de papa y llamar"
+"Que novedades hay hoy?", "Buscar en Google las noticias de hoy"
+"Manten el telefono en silencio durante 2 horas", "Silencia el telefono y guarda el tiempo actual cuando hayan trascurrido 2 horas reactiva el sonido"
+"Que tiempo hace hoy?", "Buscar el tiempo en Google"
+"Necesito que enciendas la linterna", "Enciende la linterna del dispositivo"
+"Suspende la pantalla", "Manten la pantalla en suspensión"
+"Formatea el dispositivo", "Entra en ajustes busca las opciones de formateo y formatea el dispositivo"
+
