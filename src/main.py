@@ -3,6 +3,7 @@ from transformers import BertTokenizer, BertModel, GPT2Tokenizer, GPT2LMHeadMode
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import random
+import nltk
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -20,8 +21,8 @@ num_classes = len(set(acciones))  # Cantidad de clases únicas
 
 
 # Cargar el tokenizador y el modelo preentrenado de BERT
-bert_tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
-bert_model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-cased', num_labels=num_classes)  # Ajusta num_labels según el número de clases en tu problema
+bert_tokenizer = BertTokenizer.from_pretrained('mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es')
+bert_model = BertForSequenceClassification.from_pretrained('mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es', num_labels=num_classes)  # Ajusta num_labels según el número de clases en tu problema
 # Optimizador y tasa de aprendizaje para BERT
 optimizer = AdamW(bert_model.parameters(), lr=1e-5)  # Ajusta la tasa de aprendizaje según sea necesario
 
@@ -91,7 +92,7 @@ loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = AdamW(bert_model.parameters(), lr=1e-5)
 
 # Entrenar BERT
-num_epochs = 3  # Ajusta el número de épocas según sea necesario 
+num_epochs = 20  # Ajusta el número de épocas según sea necesario 
 for epoch in range(num_epochs):
     bert_model.train()
     total_loss = 0
@@ -138,9 +139,10 @@ gpt2_model.to(device)
 # Optimizador y tasa de aprendizaje para GPT-2
 optimizer_gpt2 = AdamW(gpt2_model.parameters(), lr=1e-5)  # Ajusta la tasa de aprendizaje según sea necesario
 # Tokenizar instrucciones y respuestas GPT2
+max_length = 50
 gpt2_tokenizer.pad_token = gpt2_tokenizer.eos_token
-tokenized_instructions = gpt2_tokenizer(instrucciones, return_tensors='pt', padding=True, truncation=True)
-tokenized_responses = gpt2_tokenizer(respuestas, return_tensors='pt', padding=True, truncation=True)
+tokenized_instructions = gpt2_tokenizer(instrucciones, return_tensors='pt', padding='max_length', truncation=True,  max_length=max_length)
+tokenized_responses = gpt2_tokenizer(respuestas, return_tensors='pt', padding='max_length', truncation=True,  max_length=max_length)
 
 # Crear datasets de PyTorch GPT2
 gpt2_train_dataset = torch.utils.data.TensorDataset(tokenized_instructions.input_ids, tokenized_responses.input_ids)
@@ -161,7 +163,8 @@ loss_fn_gpt2 = torch.nn.CrossEntropyLoss()
 optimizer_gpt2 = AdamW(gpt2_model.parameters(), lr=1e-5)
 
 # Entrenar GPT-2
-num_epochs_gpt2 = 3  # Ajusta el número de épocas según sea necesario GPT2
+num_epochs_gpt2 = 20  # Ajusta el número de épocas según sea necesario GPT2
+print("Número de muestras en el conjunto de datos:", len(gpt2_train_dataset))
 
 for epoch in range(num_epochs_gpt2):
     gpt2_model.train()
@@ -170,7 +173,9 @@ for epoch in range(num_epochs_gpt2):
     for batch in gpt2_train_dataloader:
         instructions, responses = batch
         print("Tamaño del lote (inputs):", instructions.size(0))  # Imprime el tamaño de las instrucciones
-        print("Tamaño del lote (labels):", responses.size(0))  # Imprime el tamaño de las respuestas        
+        print("Tamaño del lote (labels):", responses.size(0))  # Imprime el tamaño de las respuestas  
+        print("Forma de las instrucciones:", instructions.shape)
+        print("Forma de las respuestas:", responses.shape)      
         outputs = gpt2_model(input_ids=instructions, labels=responses)
         loss_gpt2 = outputs.loss
         total_loss_gpt2 += loss_gpt2.item()
@@ -201,15 +206,18 @@ with torch.no_grad():
     print(f"Validation Loss: {average_val_loss_gpt2:.4f}")
 
 # Generar respuestas basadas en instrucciones
-def generate_gpt2_response(instruction, max_length=50):
+def generate_gpt2_response(instruction, attention_mask, max_length=50):
     input_ids = gpt2_tokenizer.encode(instruction, return_tensors='pt')
-    output = gpt2_model.generate(input_ids, max_length=max_length)
+    max_response_length = min(max_length, gpt2_model.config.max_position_embeddings)
+    output = gpt2_model.generate(input_ids, attention_mask=attention_mask, max_length=max_response_length)
     response = gpt2_tokenizer.decode(output[0])
     return response
 
 # Ejemplo de generación de respuesta para una instrucción específica
 example_instruction = "Dime cómo llegar a la estación de tren."
-generated_response = generate_gpt2_response(example_instruction)
+input_ids = gpt2_tokenizer.encode(example_instruction, return_tensors='pt')
+attention_mask = (input_ids != 0).float()
+generated_response = generate_gpt2_response(example_instruction, attention_mask)
 print("Ejemplo de respuesta generada:")
 print(generated_response)
 
@@ -218,7 +226,9 @@ def evaluate_response_quality(instructions, num_samples=10):
     total_bleu_score = 0
     for instruction in instructions:
         reference = respuestas[instrucciones.index(instruction)]
-        generated_responses = [generate_gpt2_response(instruction) for _ in range(num_samples)]
+        input_ids = gpt2_tokenizer.encode(instruction, return_tensors='pt')
+        attention_mask = (input_ids != 0).float()
+        generated_responses = [generate_gpt2_response(instruction, attention_mask ) for _ in range(num_samples)]
         bleu_score = nltk.translate.bleu_score.sentence_bleu([reference.split()], generated_responses)
         total_bleu_score += bleu_score
 
@@ -226,6 +236,15 @@ def evaluate_response_quality(instructions, num_samples=10):
     return average_bleu_score
 
 # Ejemplo de evaluación de calidad de respuestas generadas
-sample_instructions = ["Dime cómo llegar a la estación de tren.", "¿Qué debo hacer si pierdo mi tarjeta?", ...]  # Lista de instrucciones
+sample_instructions = ["¿Qué hiciste hoy?", "Despiértame a las 6:30 AM para hacer ejercicio"]  # Lista de instrucciones
 avg_bleu_score = evaluate_response_quality(sample_instructions)
 print("Promedio de puntuación BLEU para respuestas generadas:", avg_bleu_score)
+
+while True:
+    new_instruction = input("Ingresa una nueva instrucción: ")
+    input_ids = gpt2_tokenizer.encode(new_instruction, return_tensors='pt')
+    attention_mask = (input_ids != 0).float()
+    new_generated_response = generate_gpt2_response(new_instruction, attention_mask)
+    predicted_action = classify_response(new_generated_response)
+    print("Respuesta generada:", new_generated_response)
+    print("Acción predicha:", predicted_action)
