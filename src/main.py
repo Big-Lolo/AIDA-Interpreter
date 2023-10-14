@@ -41,7 +41,7 @@ def generate_response(feature_vector):
     # Generar una secuencia de tokens a partir del vector de características con el modelo de GPT-2 
     output = gpt2_model.generate (feature_vector, max_length=50) 
     # Decodificar la secuencia de tokens con el tokenizador de GPT-2 
-    response = gpt2_tokenizer.decode(output[0]) # Devolver el texto de respuesta generado 
+    response = gpt2_tokenizer.decode(output[0], skip_special_tokens=True) # Devolver el texto de respuesta generado 
     return response 
 
 def classify_response(response): 
@@ -92,7 +92,7 @@ loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = AdamW(bert_model.parameters(), lr=1e-5)
 
 # Entrenar BERT
-num_epochs = 20  # Ajusta el número de épocas según sea necesario 
+num_epochs = 3  # Ajusta el número de épocas según sea necesario 
 for epoch in range(num_epochs):
     bert_model.train()
     total_loss = 0
@@ -133,8 +133,9 @@ print(f"Validation Accuracy: {100 * correct / total:.2f}%")
 
 # - - - - -  - --  - -- - - - - - -GPT2- - - - - - - - - - - - - -#
 # Cargar el tokenizador y el modelo preentrenado de GPT-2
-gpt2_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-gpt2_model = GPT2LMHeadModel.from_pretrained('gpt2')
+model_name = "gpt2"
+gpt2_tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+gpt2_model = GPT2LMHeadModel.from_pretrained(model_name)
 gpt2_model.to(device)
 # Optimizador y tasa de aprendizaje para GPT-2
 optimizer_gpt2 = AdamW(gpt2_model.parameters(), lr=1e-5)  # Ajusta la tasa de aprendizaje según sea necesario
@@ -163,7 +164,7 @@ loss_fn_gpt2 = torch.nn.CrossEntropyLoss()
 optimizer_gpt2 = AdamW(gpt2_model.parameters(), lr=1e-5)
 
 # Entrenar GPT-2
-num_epochs_gpt2 = 20  # Ajusta el número de épocas según sea necesario GPT2
+num_epochs_gpt2 = 3  # Ajusta el número de épocas según sea necesario GPT2
 print("Número de muestras en el conjunto de datos:", len(gpt2_train_dataset))
 
 for epoch in range(num_epochs_gpt2):
@@ -210,7 +211,7 @@ def generate_gpt2_response(instruction, attention_mask, max_length=50):
     input_ids = gpt2_tokenizer.encode(instruction, return_tensors='pt')
     max_response_length = min(max_length, gpt2_model.config.max_position_embeddings)
     output = gpt2_model.generate(input_ids, attention_mask=attention_mask, max_length=max_response_length)
-    response = gpt2_tokenizer.decode(output[0])
+    response = gpt2_tokenizer.decode(output[0], skip_special_tokens=True)
     return response
 
 # Ejemplo de generación de respuesta para una instrucción específica
