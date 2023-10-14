@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "Hola!",
+      "answer": "Hola!, en que puedo ayudarte?"
+    },
+    {
+      "question": "Como te llamas?",
+      "answer": "Me llamo AIDA, un placer conocerte!"
+    },
+    {
+      "question": "Me gustaria configurar una nueva alarma",
+      "answer": "Claro, vere que puedo hacer, dime para cuando quieres que suene la alarma?"
+    },
+    {
+      "question": "Podrias enviarle a mi amigo Juan un mensaje por whatsapp?",
+      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje"
+    },
+    {
+      "question": "Podrias encender la linterna?",
+      "answer": "Claro!, vere que puedo hacer"
+    },
+    {
+      "question": "Puedes enviarle un mensaje a mi amigo Felipe",
+      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje"
+    },
+    {
+      "question": "Enviale el siguiente mensaje a Manuel",
+      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje"
+    },
+    {
+      "question": "Que dia es hoy?",
+      "answer": "Dejame mirar, hoy es [FECHA]"
+    },
+    {
+      "question": "Me puedes decir la hora porfavor",
+      "answer": "Claro, dejame hechar un vistazo al reloj, son las [HORA]"
+    },
+    {
+        "question": "Que hora es?",
+        "answer": "Claro, dejame hechar un vistazo al reloj, son las [HORA]"
+    }
+  ]
+}
