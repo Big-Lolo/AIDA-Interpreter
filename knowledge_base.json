@@ -10,7 +10,9 @@
     },
     {
       "question": "Me gustaria configurar una nueva alarma",
-      "answer": "Claro, vere que puedo hacer, dime para cuando quieres que suene la alarma?"
+      "answer": "Claro, vere que puedo hacer, dime para cuando quieres que suene la alarma?",
+      "function": "set_alarm",
+      "feedback": true
     },
     {
       "question": "Podrias enviarle a mi amigo Juan un mensaje por whatsapp?",
@@ -40,5 +42,11 @@
         "question": "Que hora es?",
         "answer": "Claro, dejame hechar un vistazo al reloj, son las [HORA]"
     }
-  ]
+  ],
+  "systemInfo":{
+    "name_bot": "AIDA",
+    "user_name": "You"
+  }
+    
+  
 }
