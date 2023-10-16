@@ -2,7 +2,8 @@
   "questions": [
     {
       "question": "Hola!",
-      "answer": "Hola!, en que puedo ayudarte?"
+      "answer": "Hola!, en que puedo ayudarte?",
+      "function": "None"
     },
     {
       "question": "Como te llamas?",
@@ -16,31 +17,38 @@
     },
     {
       "question": "Podrias enviarle a mi amigo Juan un mensaje por whatsapp?",
-      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje"
+      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje",
+      "function": "None"
     },
     {
       "question": "Podrias encender la linterna?",
-      "answer": "Claro!, vere que puedo hacer"
+      "answer": "Claro!, vere que puedo hacer",
+      "function": "None"
     },
     {
       "question": "Puedes enviarle un mensaje a mi amigo Felipe",
-      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje"
+      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje",
+      "function": "None"
     },
     {
       "question": "Enviale el siguiente mensaje a Manuel",
-      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje"
+      "answer": "Claro, comentame que mensaje quieres que le envie, cuando termines di mi nombre y enviar\u00e9 el mensaje",
+      "function": "None"
     },
     {
       "question": "Que dia es hoy?",
-      "answer": "Dejame mirar, hoy es [FECHA]"
+      "answer": "Dejame mirar, hoy es [FECHA]",
+      "function": "None"
     },
     {
       "question": "Me puedes decir la hora porfavor",
-      "answer": "Claro, dejame hechar un vistazo al reloj, son las [HORA]"
+      "answer": "Claro, dejame hechar un vistazo al reloj, son las [HORA]",
+      "function": "None"
     },
     {
-        "question": "Que hora es?",
-        "answer": "Claro, dejame hechar un vistazo al reloj, son las [HORA]"
+      "question": "Que hora es?",
+      "answer": "Claro, dejame hechar un vistazo al reloj",
+      "function": "None"
     }
   ],
   "systemInfo":{

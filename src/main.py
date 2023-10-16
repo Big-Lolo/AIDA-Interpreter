@@ -22,7 +22,7 @@ def find_best_match(user_question: str, questions: list[str]) -> str| None:
 def get_answer_for_question(question: str, knowledge_base: dict) -> str | None:
     for q in knowledge_base["questions"]:
         if q["question"] == question:
-            return q["answer"], q["function"]
+            return q["answer"], (q["function"] if q["function"] else None)
         
 async def chat_bot():
     knowledge_base: dict = load_knowledge_base('knowledge_base.json')
@@ -38,14 +38,15 @@ async def chat_bot():
         if best_match:
             answer, function = get_answer_for_question(best_match, knowledge_base)
             print(f'{knowledge_base["systemInfo"]["name_bot"]}: {answer}')
-            await eval(function + f"({knowledge_base})")
+            if function != None and function != "None":
+                await eval(function + f"({knowledge_base})")
              
         else:
             print(f'{knowledge_base["systemInfo"]["name_bot"]}: I don\'t know the answer. Can you teach me=?')
             new_answer: str = input('Type the answer or "skip" to skip: ')
 
             if new_answer.lower() != 'skip':
-                knowledge_base["questions"].append({"question": user_input, "answer": new_answer})
+                knowledge_base["questions"].append({"question": user_input, "answer": new_answer, "function":"None"})
                 save_knowledge_base('knowledge_base.json', knowledge_base)
                 print(f'{knowledge_base["systemInfo"]["name_bot"]}: Thank you! I learned a new response!')
 
