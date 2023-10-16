@@ -2,11 +2,10 @@ import random
 import json
 import pickle
 import numpy as np
-
 import nltk
 from nltk.stem import WordNetLemmatizer
-
 from tensorflow.keras.models import load_model
+from incorporations.functions import extract_alarm_information, set_alarm
 
 
 lemmatizer = WordNetLemmatizer()
@@ -48,14 +47,17 @@ def get_response(intents_list, intents_json):
     for i in list_of_intents:
         if i['tag'] == tag:
             result = random.choice(i['responses'])
+            functions = i['function']
             break
 
-    return result
+    return result, functions
 
 print("El bot esta funcionando!: ")
 
-while True:
-    message = input('usuario: ')
-    ints = predict_class(message)
-    res = get_response(ints, intents)
-    print(res)
+async def wake_Up():
+    while True:
+        message = input('usuario: ')
+        ints = predict_class(message)
+        ask, res, functions = get_response(ints, intents)
+        print(res) #Indicar la respuesta
+        await eval(functions + f"({message})")
