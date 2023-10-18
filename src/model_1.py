@@ -72,7 +72,7 @@ sgd = SGD(lr=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose='auto')
-model.save('chatbot_model.h5', hist)
+model.save('chatbot_model_v3.h5', hist)
 print("Proceso finalizado!")
 
 

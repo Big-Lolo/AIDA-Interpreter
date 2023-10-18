@@ -1,11 +1,19 @@
 import spacy
 import re
-from Alarma_Functions.get_hour import get_hour, find_hours_in_string
-from Alarma_Functions.get_date import extract_date_info
-from Alarma_Functions.iterativity import find_days_in_string
-from Alarma_Functions.get_vibration import detect_vibration
-from Alarma_Functions.get_volumen import extract_volume_information
-from Alarma_Functions.get_alarm_name import extract_alarm_name
+import os
+import sys
+
+directorio_actual = os.path.dirname(os.path.abspath(__file__))
+carpeta_raiz = os.path.abspath(os.path.join(directorio_actual, '../..'))
+sys.path.append(carpeta_raiz)
+
+
+from incorporations.Alarma_Functions.get_hour import get_hour, find_hours_in_string
+from incorporations.Alarma_Functions.get_date import extract_date_info
+from incorporations.Alarma_Functions.iterativity import find_days_in_string
+from incorporations.Alarma_Functions.get_vibration import detect_vibration
+from incorporations.Alarma_Functions.get_volumen import extract_volume_information
+from incorporations.Alarma_Functions.get_alarm_name import extract_alarm_name
 
 
 
@@ -76,7 +84,3 @@ def extract_delete_alarm_information(sent):
 
     
 
-while True:
-    tt = input("oracion: ")
-    a = delete_alarm(tt)
-    print(a)

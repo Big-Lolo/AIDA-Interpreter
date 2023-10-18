@@ -1,6 +1,12 @@
 import spacy
-from Alarma_Functions.others.string2num import get_number_from_sentence
+import os
+import sys
 import re
+
+directorio_actual = os.path.dirname(os.path.abspath(__file__))
+carpeta_raiz = os.path.abspath(os.path.join(directorio_actual, '../..'))
+sys.path.append(carpeta_raiz)
+from incorporations.Alarma_Functions.others.string2num import get_number_from_sentence
 
 
 nlp = spacy.load("es_core_news_sm")  ##Interprete de oracion con tal de sacar argumentos de las oraciones
@@ -73,8 +79,27 @@ def get_hour(input_text):
 
 
 def find_hours_in_string(text):
-  # Buscar la palabra "hasta" o "a" y dividir la oración en dos partes
+    # Buscar menciones de "todo el día", "durante el día", etc.
+    menciones_dia_completo = ['todo el día','todo el dia', 'durante el día', 'durante el dia', 'a lo largo del día', 'a lo largo del dia', 'el día entero', 'el dia entero', 'todas las del día', 'todas las del dia']
+    menciones_tarde = ['esta tarde', 'durante la tarde']
+    menciones_noche = ['esta noche', 'durante la noche', 'de noche']
+
     texto = get_number_from_sentence(text)
+    for mencion in menciones_dia_completo:
+        if mencion in texto.lower():
+            return (0, 0), (23, 59)
+    
+    for mencion in menciones_noche:
+        if mencion in texto.lower():
+            return (21, 0), (23, 59)
+        
+    for mencion in menciones_tarde:
+        if mencion in texto.lower():
+            return (15, 0), (20, 59)
+
+    # Si no hay menciones de día completo, continuar con el procesamiento existente
+    
+
     if ' hasta ' in texto:
         partes = texto.split(' hasta ')
     elif ' a ' in texto:

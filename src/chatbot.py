@@ -5,7 +5,8 @@ import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
-from incorporations.functions import set_alarm, delete_alarm, disable_alarm
+from incorporations.functions_alarm import set_alarm, delete_alarm, disable_alarm
+from incorporations.functions_calendar import create_appointment_calendar
 
 import asyncio
 
@@ -15,7 +16,7 @@ intents = json.loads(open('intents.json').read())
 
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('chatbot_model.h5')
+model = load_model('chatbot_model_v3.h5')
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
@@ -53,7 +54,6 @@ def get_response(intents_list, intents_json):
             break
 
     return result, functions
-
 
 
 async def wake_Up():
