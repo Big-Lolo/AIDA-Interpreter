@@ -5,7 +5,9 @@ import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
-from incorporations.functions import extract_alarm_information, set_alarm
+from incorporations.functions import set_alarm, delete_alarm, disable_alarm
+
+import asyncio
 
 
 lemmatizer = WordNetLemmatizer()
@@ -52,12 +54,19 @@ def get_response(intents_list, intents_json):
 
     return result, functions
 
-print("El bot esta funcionando!: ")
+
 
 async def wake_Up():
+    print("El bot esta funcionando!: ")
     while True:
         message = input('usuario: ')
         ints = predict_class(message)
-        ask, res, functions = get_response(ints, intents)
+        res, functions = get_response(ints, intents)
         print(res) #Indicar la respuesta
-        await eval(functions + f"({message})")
+        if functions:
+            print(functions)
+            await globals()[functions](message)
+
+
+if __name__ == '__main__':
+    asyncio.run(wake_Up())

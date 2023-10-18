@@ -17,35 +17,44 @@ def find_days_in_string(input_string):
     days_of_week = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']
     
     # Expresión regular para buscar nombres de días de la semana
-    pattern = r'\b(?:' + '|'.join(days_of_week) + r')\b'
+    day_pattern = r'\b(?:' + '|'.join(days_of_week) + r')\b'
     
     # Buscar coincidencias con la expresión regular en el string
-    matches = re.findall(pattern, input_string, re.IGNORECASE)
+    day_matches = re.findall(day_pattern, input_string, re.IGNORECASE)
     
     # Convertir los nombres de días encontrados a mayúsculas
     # para tener coherencia en el formato
-    matches = [day.capitalize() for day in matches]
+    day_matches = [day.capitalize() for day in day_matches]
     
-    # Identificar y eliminar casos con "próximo" antes del día de la semana
+    # Expresión regular para buscar rangos de días de la semana y "fin de semana"
+    range_pattern = r'\b(de|desde|toda\s*la\s*semana|fin\s*de\s*semana)\s+(?:el\s+)?(\w+)\s*(?:hasta|a)?\s*(?:el\s+)?(\w+)\b'
+    
+    # Buscar coincidencias con la expresión regular en el string
+    range_matches = re.findall(range_pattern, input_string, re.IGNORECASE)
+    
+    # Manejar los rangos de días y "fin de semana"
     modified_matches = []
-    prev_word = None
-    for day in matches:
-        if prev_word and prev_word.lower() == 'próximo' and day.lower() == 'lunes':
-            # Si la palabra anterior indica "próximo" y es seguida por "lunes", no incluimos "lunes"
-            pass
-        else:
-            # No es "próximo lunes", lo incluimos
-            modified_matches.append(day)
-        prev_word = day
+    for match in range_matches:
+        if match[0] and match[0].lower() in ['de', 'desde', 'toda la semana']:
+            # Si se especifica un rango o toda la semana
+            start_day = match[1].capitalize()
+            end_day = match[2].capitalize() if match[2] else match[1].capitalize()
+            
+            try:
+                start_idx = days_of_week.index(start_day.lower())
+                end_idx = days_of_week.index(end_day.lower())
+                # Agregar los días del rango al resultado
+                modified_matches.extend(days_of_week[start_idx:end_idx + 1])
+            except ValueError:
+                # Si la palabra no es un día de la semana válido, ignorarla
+                pass
+        elif match[0] and match[0].lower() == 'fin de semana':
+            # Si se especifica "fin de semana"
+            modified_matches.extend(['Sábado', 'Domingo'])
+    
+    # Agregar los días individuales encontrados
+    modified_matches.extend(day_matches)
     
     return modified_matches
 
 
-def exect():
-    while True:
-        vare = input("Introduce periodicidad: ")
-        a = find_days_in_string(vare)
-        print(a)
-
-if __name__ == '__main__':
-    exect()

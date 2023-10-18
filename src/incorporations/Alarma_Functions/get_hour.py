@@ -1,6 +1,6 @@
 import spacy
-from incorporations.Alarma_Functions.others.string2num import get_number_from_sentence
-
+from Alarma_Functions.others.string2num import get_number_from_sentence
+import re
 
 
 nlp = spacy.load("es_core_news_sm")  ##Interprete de oracion con tal de sacar argumentos de las oraciones
@@ -71,6 +71,33 @@ def get_hour(input_text):
     return (hour, minutes)
 
 
+
+def find_hours_in_string(text):
+  # Buscar la palabra "hasta" o "a" y dividir la oración en dos partes
+    texto = get_number_from_sentence(text)
+    if ' hasta ' in texto:
+        partes = texto.split(' hasta ')
+    elif ' a ' in texto:
+        partes = texto.split(' a ')
+    else:
+        return ([None, None], [None, None])
+
+    if len(partes) != 2:
+        return ([None, None], [None, None])
+
+    # Extraer números de las dos partes
+    numero1 = get_hour(partes[0])
+    numero2 = get_hour(partes[1])
+
+    # Asignar los números a horas y minutos
+    rango_minimo_horas = numero1
+    rango_maximo_horas = numero2
+
+    if rango_minimo_horas[0] == None or rango_minimo_horas[1] == None or rango_maximo_horas[0] == None or rango_maximo_horas[1] == None:
+        rango_minimo_horas = None
+        rango_maximo_horas = None
+
+    return rango_minimo_horas, rango_maximo_horas
 
 
 
