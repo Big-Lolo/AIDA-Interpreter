@@ -7,6 +7,7 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 from incorporations.functions_alarm import set_alarm, delete_alarm, disable_alarm
 from incorporations.functions_calendar import create_appointment_calendar
+from incorporations.functions_calls import realize_call
 
 import asyncio
 
@@ -16,7 +17,7 @@ intents = json.loads(open('intents.json').read())
 
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('chatbot_model_v3.h5')
+model = load_model('chatbot_model_v4.h5')
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
@@ -35,10 +36,16 @@ def bag_of_words(sentence):
 def predict_class(sentence):
     bow = bag_of_words(sentence)
     res = model.predict(np.array([bow]))[0]
-    ERROR_THRESHOLD = 0.50
+    ERROR_THRESHOLD = 0.68
+
+    # Si la probabilidad máxima está por debajo del umbral, muestra un mensaje sugerido
+    if max(res) < ERROR_THRESHOLD:
+        return [{'intent': 'Desconocido', 'probability': str(max(res))}]
+
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
-    results.sort(key=lambda x: x[1], reverse = True)
+    results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
+
     for r in results:
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
 
@@ -46,11 +53,14 @@ def predict_class(sentence):
 
 def get_response(intents_list, intents_json):
     tag = intents_list[0]['intent']
+    if tag == 'Desconocido':
+        return "Lo siento, no entiendo lo que quieres decir. ¿Podrías reformular tu pregunta?", None
+
     list_of_intents = intents_json['intents']
     for i in list_of_intents:
         if i['tag'] == tag:
             result = random.choice(i['responses'])
-            functions = i['function']
+            functions = i.get('function')
             break
 
     return result, functions

@@ -1,5 +1,5 @@
 help_dict = {
-    'uno':'01','dos':'02','tres':'03','cuatro':'04','cinco':'05','seis':'06','siete':'07','ocho':'08','nueve':'09',
+    'uno':'1','dos':'2','tres':'3','cuatro':'4','cinco':'5','seis':'6','siete':'7','ocho':'8','nueve':'9',
     'diez':'10','once':'11','doce':'12','trece':'13','catorce':'14','quince':'15','dieciseis':'16','dieci seis':'16','diecisiete':'17','dieci siete':'17','dieciocho':'18','dieci ocho':'18','diecinueve':'19','dieci nueve':'19',
     'veinte':'20', 'veintiuno':'21', 'veinti uno':'21', 'veintidos':'22', 'veinti dos':'22', 'veintitres':'23', 'veinti tres':'23','veinticuatro':'24', 'veinti cuatro':'24', 'veinticinco':'25', 'veinti cinco':'25', 'veintiseis':'26', 'veinti seis':'26','veintisiete':'27','veinti siete':'27','veintiocho':'28','veinti ocho':'28', 'veintinueve':'29', 'veinti nueve':'29',
     'treinta':'30', 'treinta y uno':'31', "treintayuno":'31', 'treinta y dos':'32', 'treintaydos':'32','treinta y tres':'33','treinta y tres':'33','treintaytres':'33','treinta y cuatro':'34','treintaycuatro':'34','treinta y cinco':'35','treintaycinco':'35','treinta y seis':'36','treintayseis':'36','treinta y siete':'37','treintaysiete':'37','treinta y ocho':'38','treintayocho':'38','treinta y nueve':'39','treintaynueve':'39',
@@ -11,22 +11,23 @@ help_dict = {
     'noventa':'90','noventa y uno':'91','noventayuno':'91','noventa y dos':'92','noventaydos':'92','noventa y tres':'93','noventaytres':'93','noventa y cuatro':'94','noventaycuatro':'94','noventa y cinco':'95','noventaycinco':'95','noventa y seis':'96','noventayseis':'96','noventa y siete':'97','noventaysiete':'97','noventa y ocho':'98','noventayocho':'98','noventa y nueve':'99','noventaynueve':'99',
     'cien':'100',
     'ciento':'1',
-    'dos cientos':'2','doscientos':'2',
-    'tres cientos':'3','trescientos':'3',
-    'cuatro cientos':'4','cuatrocientos':'4',
-    'quinientos':'5',
-    'seis cientos':'6','seiscientos':'6',
-    'sete cientos':'7','setecientos':'7',
-    'ocho cientos':'8','ochocientos':'8',
-    'nove cientos':'9','novecientos':'9',
+    'dos cientos':'200','doscientos':'200',
+    'tres cientos':'300','trescientos':'300',
+    'cuatro cientos':'400','cuatrocientos':'400',
+    'quinientos':'500',
+    'seis cientos':'600','seiscientos':'600',
+    'sete cientos':'700','setecientos':'700',
+    'ocho cientos':'800','ochocientos':'800',
+    'nove cientos':'900','novecientos':'900',
     'mil':'1000',
     'cero' : '0'
 }
 
 def get_number_from_sentence(sentence: str) -> str:
     # Separa la oración en palabras
-    words = sentence.split()
-    
+    text_without_commas = sentence.replace(',', '')
+    words = text_without_commas.split()
+
     updated_words = []  # Lista para almacenar las palabras actualizadas
     
     for word in words:

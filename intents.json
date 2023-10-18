@@ -1,6 +1,6 @@
 {"intents": [
     {"tag": "saludo",
-    "patterns": ["Hola!", "Hola que tal?", "Muy buenas", "Saludos", "Buenos dias", "Buenas tardes", "Cuanto tiempo sin hablar", "¿Como estas?", "¡Hola amigo/a!", "Hola ¿como te va?", "¡Buenas que sorpresa verte!", "Hola, ¿como has estado?", "Hola, ¿que cuentas?", "¿Que hay de nuevo?", "Hola, ¿que pasa?", "Saludos cordiales", "¡Hola, que alegria verte!", "¿Que tal estas?", "Hola, ¿todo bien?", "¡Hola, encantado/a de conocerte!", "¿Como ha ido el dia?", "Hola, ¿que tal va todo?", "¡Hola, como te encuentras?", "¿Que novedades tienes?", "Hola, ¿como andas?", "¡Buen dia, amigo/a!", "¡Hola, como estas hoy?", "¿Que cuentas de interesante?", "Hola, ¿como te ha ido?"],
+    "patterns": ["Hola!", "Hola que tal?", "Muy buenas", "Saludos", "Buenos dias", "Buenas tardes", "Cuanto tiempo sin hablar", "¿Como estas?", "¡Hola amigo/a!", "Hola ¿como te va?", "¡Buenas que sorpresa verte!", "Hola, ¿como has estado?", "Hola, ¿que cuentas?", "¿Que hay de nuevo?", "Hola, ¿que pasa?", "Saludos cordiales", "¡Hola, que alegria verte!", "¿Que tal estas?", "Hola, ¿todo bien?", "¡Hola, encantado/a de conocerte!", "¿Como ha ido el dia?", "Hola, ¿que tal va todo?", "¡Hola, como te encuentras?", "¿Que novedades tienes?", "Hola, ¿como andas?", "¡Buen dia, amigo/a!", "¡Hola, como estas hoy?", "¿Que cuentas de interesante?", "Hola, ¿como te ha ido?", "hola", "hooola", "Buenas tardes", "Buenas noches", "Buenos diias", "Buenos dias"],
     "responses": ["Hola!, en que puedo ayudarte?", "Buenas!", "Saludos, que puedo hacer hoy por ti?", "¡Hola! Estoy aqui para ayudarte en lo que necesites.", "Hola, ¿como estas? ¿En que puedo asistirte hoy?", "Buenos dias, ¿en que puedo colaborar contigo?", "Hola, es un placer asistirte. ¿En que necesitas ayuda?", "¡Hola! Estoy lista para responder tus preguntas o ayudarte en lo que necesites.", "Saludos, ¿como puedo ser de tu ayuda en este momento?", "Hola, ¿en que puedo contribuir para hacer tu dia mejor?", "Hola, ¿como va todo? Estoy aqui para asistirte en lo que necesites.", "Buenos dias, ¿como estas hoy? Estoy aqui para ayudar en lo que necesites.", "¡Hola! Si tienes alguna consulta o necesitas ayuda, estoy a tu disposicion.", "Hola, ¿que tal estas? ¿En que puedo asistirte hoy?", "Saludos, estoy aqui para responder tus preguntas o asistirte en lo que necesites.", "¡Hola! ¿En que puedo colaborar contigo el dia de hoy?", "Buenas tardes, ¿en que puedo ayudarte ahora?", "Hola, ¿como puedo hacer tu dia un poco mejor hoy?", "¡Hola! Si tienes alguna inquietud, estoy aqui para ayudar.", "Saludos, ¿como estas? ¿En que puedo asistirte hoy?"],
     "function":null
     },
@@ -39,15 +39,6 @@
     "responses":["Entendido!, hare eso por ti, no te preocupes, enseguida me pongo a desactivar alarmas", "De acuerdo, cuando tenga un rato libre me pondre a desactivar alarmas", "Que remedio, primero crear alarmas y despues desactivarlas. Enseguida te las desactivo", "De acuerdo, te desactivo las alarmas que deseas", "Entendido, ahora te desactivo las alarmas que me pediste", "Entiendo, me pongo a desactivar alarmas en breves", "Con gusto te desactivo algunas alarmas, estoy para ayudarte", "Perfecto, no te preocupes, te desactivo ahora las alarmas que me solicitaste."],
     "function":"disable_alarm"   
     },
-    {"tag":"obtener_alarma",
-    "patterns":[],
-    "responses":[],
-    "function":"get_alarms"   
-    },
-
-
-
-
     {"tag":"solicitud_crear_evento_calendario",
     "patterns":["Podrias crearme un evento ?", "Me ayudas a crear un evento?", "Me hechas un cable creando un evento?", "Es posible crear un evento nuevo en el calendario?", "Podria crear un evento nuevo en el calendario?", "Me hechas un cable creando un evento en el calendario?", "Como puedo crear un evento?", "Como puedo crear un evento en el calendario?", "Necesito acordarme de los proximos eventos, me podrias crear un nuevo evento en el calendario?", "Es imperativo acordarme de los proximos sucesos, podrias crearme para ello algunos eventos en el calendario ?", "Necesito soporte para crear eventos en el calendario?", "Como puedo hacer para anotar algun que otro evento en el calendaro con tal de acordarme?", "Echame una mano anda y creame un nuevo evento en el calendario", "Requiero nuevos eventos en el calendario"],
     "responses":["Claro que te ayudaré!, proporcioname informacion sobre los eventos y me encargo", "Desde luego!, tu indicame mas detalles sobre el evento y te lo creo","Por supuesto, te ayudo, podrias proporcionarme mas informacion sobre los eventos?", "De acuerdo, proporcioname un poco mas de informacion sobre los eventos que quieras crear", "Entendido, me pondre a crear eventos, tu proporcioname la información", "Que remedio, a crear eventos en tu calendario, tu proporcioname la informacion necesaria de los eventos"],
@@ -73,17 +64,6 @@
     "responses":["De acuerdo, voy a hechar un ojo a los eventos", "Entendido, dejame ver que eventos hay", "Entendí, hecho un vistazo a los eventos", "A ver que eche un ojo a la lista de eventos", "Está bien, déjame ver qué eventos tienes.", "Claro, déjame revisar los eventos rápidamente.", "Por supuesto, un segundo mientras te indico qué hay.", "Un segundo, voy a comprobarlo", "A ver, voy a echar un ojo a la lista de eventos.", "Por supuesto, un segundo que te indico que hay.", "De acuerdo, voy a revisar los eventos en un momento.", "Entendido, voy a echar un vistazo a tu calendario para informarte."],
     "function":"get_appointment_calendar"  
     },
-
-
-
-
-
-
-
-
-
-
-
     {"tag":"nombre",
     "patterns":["Como te llamas?", "Cual es tu nombre?", "Me presento, me llamo X, como te llamas?", "Saludos, me llamo Y, como te llamas?", "Buenos dias, me llamo Z, cual es tu nombre?", "Hola!, como te llamas?", "Me podrias indicar tu nombre porfavor?", "Indicame tu nombre?", "Quiero saber tu nombre", "Como deberia llamarte?", "Quien eres tu?"],
     "responses":["Buenas!, me llamo AIDA, un placer!", "Hola!, me llamo AIDA", "Me presento, soy AIDA tu IA para dispositivos Android, estoy aqui para lo que necesites", "Muy buenas!, Soy AIDA, un gusto en conocerte!", "Lamento no haberme presentado antes, soy AIDA, tu IA de confianza!", "Salutaciones, soy AIDA, tu asistente virtual"],

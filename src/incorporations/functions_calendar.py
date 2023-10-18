@@ -68,6 +68,3 @@ async def main():
         result = await get_calendar_data_info(texte)
         print(result)
     
-
-if __name__ == '__main__':
-    asyncio.run(main())

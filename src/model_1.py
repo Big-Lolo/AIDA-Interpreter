@@ -68,11 +68,11 @@ model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(len(train_y[0]), activation='softmax'))
 
-sgd = SGD(lr=0.01, momentum=0.9, nesterov=True)
+sgd = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
-hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose='auto')
-model.save('chatbot_model_v3.h5', hist)
+hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=32, verbose='auto')
+model.save('chatbot_model_v4.h5', hist)
 print("Proceso finalizado!")
 
 
