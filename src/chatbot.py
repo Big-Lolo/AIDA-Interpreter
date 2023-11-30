@@ -2,31 +2,31 @@ import random
 import json
 import pickle
 import numpy as np
-import nltk
-from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 from incorporations.functions_alarm import set_alarm, delete_alarm, disable_alarm
 from incorporations.functions_calendar import create_appointment_calendar
 from incorporations.functions_calls import realize_call
+import spacy
+nlp = spacy.load('es_core_news_sm')
 
 import asyncio
 
 
-lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('intents.json').read())
 
+intents_doc = json.loads(open('intents.json').read())
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('chatbot_model_v4.h5')
+model = load_model('chatbot_model_v5.h5')
 
 def clean_up_sentence(sentence):
-    sentence_words = nltk.word_tokenize(sentence)
-    sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
+    # Tokenizar y lematizar la oración usando spaCy
+    doc = nlp(sentence)
+    sentence_words = [token.lemma_ for token in doc if token.lemma_ not in [" ", "\n"]]
     return sentence_words
 
 def bag_of_words(sentence):
     sentence_words = clean_up_sentence(sentence)
-    bag =[0] * len(words)
+    bag = [0] * len(words)
     for w in sentence_words:
         for i, word in enumerate(words):
             if word == w:
@@ -66,12 +66,22 @@ def get_response(intents_list, intents_json):
     return result, functions
 
 
+
+
+
+
+
+
+
+
+
+
 async def wake_Up():
     print("El bot esta funcionando!: ")
     while True:
         message = input('usuario: ')
         ints = predict_class(message)
-        res, functions = get_response(ints, intents)
+        res, functions = get_response(ints, intents_doc)
         print(res) #Indicar la respuesta
         if functions:
             print(functions)

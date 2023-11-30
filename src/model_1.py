@@ -2,6 +2,7 @@ import random
 import json
 import pickle
 import numpy as np
+import tensorflow as tf
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -72,8 +73,16 @@ sgd = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=32, verbose='auto')
-model.save('chatbot_model_v4.h5', hist)
+model.save('chatbot_model_v5.h5', hist)
 print("Proceso finalizado!")
+
+
+##CONVERT MODEL TO FORMAT FOR TENSORFLOW LTE
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+
+with open('chatbot_model_lite_20231130.tflite', 'wb') as f:
+    f.write(tflite_model)
 
 
 

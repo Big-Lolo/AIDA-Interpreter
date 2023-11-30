@@ -114,7 +114,29 @@
     "patterns":["Mándale un audio a Raul", "Mandale un audio a Cristina", "manda un audio a jorge", "envia un audio a Sebastian", "Grábale un mensaje de voz a Laura", "Mándale una nota de voz a Marcos", "Manda un audio a Carolina", "Envía un mensaje de voz a Pablo", "Grábale un mensaje de voz a Martina", "Mándale una nota de voz a Andrés", "Manda un audio a Sofía", "Envía un mensaje de voz a Juan", "Grábale un mensaje de voz a Isabel", "Mándale una nota de voz a Felipe", "Manda un audio a Valentina", "Envía un mensaje de voz a Diego", "Grábale un mensaje de voz a Lucía", "Mándale una nota de voz a Sergio", "Manda un audio a Natalia", "Envía un mensaje de voz a Daniel", "Crear nuevo audio de voz para Matias", "Enviar nota de voz para Julia", "Audio de whatsapp para Esteban", "Audio para Meritxell", "Crea un audio para Ana", "Crea nueva nota de voz para Franklin", "Puedes enviarle un audio ahora a raul?", "Puedes enviar un audio a Jose?", "Necesito que le envies un audio a Sam", "Respondele con un audio a Jordi", "Responde al mensaje con un audio de whatsapp para Eloi", "Responde con una nota de voz para Emilio", "Responde pablo con un audio", "Responde a Javier con un audio de whatsapp", "Crea una respuesta para Santiago con un audio de whatsapp"],
     "responses":["Entiendo, Buscando a contacto", "De acuerdo, Busco a contacto", "Entendido!, Voy a buscar el chat", "Vale, voy a buscar el chat del contacto", "Entendi, me pongo a buscar al contacto", "Perfecto, busco el chat del contacto", "Claro, voy a buscar el chat", "Listo, buscaré el chat del contacto", "De acuerdo, estoy buscando el chat", "Entendido, buscaré el chat del contacto", "Voy a buscar el chat, un momento", "Está bien, busco el chat del contacto", "De acuerdo, buscaré el chat ahora", "Entiendo, buscaré el chat del contacto", "Vale, buscaré el chat, dame un segundo", "Está bien, estoy buscando el chat", "Claro, buscaré el chat del contacto", "De acuerdo, buscaré el chat de inmediato", "Entendido, buscaré el chat ahora mismo", "Voy a buscar el chat, por favor espera", "De acuerdo, estoy en proceso de búsqueda del chat"],
     "function":"create_audio_whatsapp"
-    }
+    },
+
+    {"tag":"linterna",  
+    "patterns":["Enciende la linterna", "Apaga la linterna", "Necesito mas luz, enciendeme la linterna", "Iluminame y enciende la linterna", "Necesito que me enciendas la linterna del dispositivo", "Encender linterna"],
+    "responses":[""],
+    "function":"create_audio_whatsapp"
+    },
+    {"tag":"crear_audio_whatsapp",  
+    "patterns":[""],
+    "responses":[""],
+    "function":"create_audio_whatsapp"
+    },
+    {"tag":"crear_audio_whatsapp",  
+    "patterns":[""],
+    "responses":[""],
+    "function":"create_audio_whatsapp"
+    },
+    {"tag":"crear_audio_whatsapp",  
+    "patterns":[""],
+    "responses":[""],
+    "function":"create_audio_whatsapp"
+    },
+    
 ]
 
 }
