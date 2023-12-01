@@ -117,25 +117,30 @@
     },
 
     {"tag":"linterna",  
-    "patterns":["Enciende la linterna", "Apaga la linterna", "Necesito mas luz, enciendeme la linterna", "Iluminame y enciende la linterna", "Necesito que me enciendas la linterna del dispositivo", "Encender linterna"],
-    "responses":[""],
-    "function":"create_audio_whatsapp"
+    "patterns":["Enciende la linterna", "Apaga la linterna", "Necesito mas luz, enciendeme la linterna", "Iluminame y enciende la linterna", "Necesito que me enciendas la linterna del dispositivo", "Encender linterna", "Enciendeme la linterna", "Activame la linterna", "No veo muy bien por aqui, podrias encenderme la linterna", "Que oscuro es5ta esto, enciendeme la linterna", "Ya no necesito mas luz, apaga la linterna", "Requiero que apagues la linterna", "Me puedes apagar la linterna porfavor", "Necesitaria que me apagaras la linterna", "Ya hay bastante luz, apaga la linterna", "Me quedo sin bateria, apagame la linterna", "Apaga el flash", "Enciende el flash", "Necesito que me apagues la luz que sale del dispositivo", "Hazme un favor y apagame la linterna porfavor"],
+    "responses":["De acuerdo, me pongo a ello", "Entendido, enseguida", "Un placer, me pongo a ello", "Entendí, enseguida lo hago", "Un momento por favor que he perdido donde estaba la linterna", "Dejame ver. ¡Aqui esta el boton!", "Desde luego, no pidas mas"],
+    "function":"linternaInterpreter"
     },
-    {"tag":"crear_audio_whatsapp",  
-    "patterns":[""],
-    "responses":[""],
-    "function":"create_audio_whatsapp"
+    {"tag":"power_control",  
+    "patterns":["Apagame el dispositivo", "Enciendeme el dispositivo", "Enciende el dispositivo", "Necesito que apagues el dispositivo", "El dispositivo me va muy mal, podrias reiniciarmelo", "Necesito que entres en modo reinicio", "Activa el modo reinicio", "Apagame la pantalla del dispositivo", "Suspendeme la pantalla del dispositivo", "Cierra la pantalla", "Apaga la pantalla", "Desactivame la pantalla", "Deshabilita la pantalla", "Apaga el dispositivo", "Apaga todo el dispositivo"],
+    "responses":["De acuerdo, me pongo a ello", "Entendido, enseguida", "Un placer, me pongo a ello", "Entendí, enseguida lo hago", "Un momento por favor que he perdido donde estaba la linterna", "Dejame ver. ¡Aqui esta el boton!", "Desde luego, no pidas mas"],
+    "function":"powerControlInterpreter"
     },
-    {"tag":"crear_audio_whatsapp",  
-    "patterns":[""],
-    "responses":[""],
-    "function":"create_audio_whatsapp"
+    {"tag":"conection_control",  
+    "patterns":["Enciende los datos móviles", "Enciende los datos", "Activa la conexion por datos moviles", "Desactivame la conexion por datos moviles", "Desactiva los datos moviles", "Deshabilita los datos moviles", "habilita los datos moviles", "No tengo wifi aqui, activame los datos moviles", "Necesito que me actives la conexion wifi", "Enciende la señal wifi", "Enciende el wifi", "Habilitame el wifi", "Conectate a la red wifi", "Habilita el wifi", "Activa el wifi", "Desactiva el wifi", "Desconecta el wifi", "Deshabilita el wifi", "Apaga el wifi", "Apagame la conexion wifi anda", "Me haces un favor y me apagas la conexion wifi", "Enciendeme el bluethooth", "Habilitame el bluethooth", "Activame el bluethooth", "Enciende la conexion bluethooth", "Necesito que me actives el manos libres", "Activa el bluethooth", "Enciende la conexion bluethooth", "Deshabilita la conexion bluethooth", "Desconecta la conexion bluethooth", "Desactiva la conexion bluethooth", "Inhibe la conexion bluethooth", "Desactiva el bluethooth", "Deshabilita el bluethooth"],
+    "responses":["De acuerdo enseguida lo hago", "Entendí, ahora me pongo a ello", "Vale!", "Claro!"],
+    "function":"interpreterDeConexiones"
     },
-    {"tag":"crear_audio_whatsapp",  
-    "patterns":[""],
+    {"tag":"volumen_dispositivo",  
+    "patterns":["Necesito que me subas el volumen", "Baja el volumen", "Silenciame el dispositivo", "Mutea el dispositivo", "Aumenta el volumen", "Sube 2 puntos de volumen", "Incrementa el volumen en un 20%", "Aumenta el volumen en un 50%", "Necesitaria que me bajaras el volumen", "Baja el volumen", "Baja 2 puntos de volumen", "Bajame el volumen de las llamadas un 20%", "Bajame el volumen de la multimedia un 10%", "Subeme el volumen de las alarmas un 30%", "Incrementa el volumen de las llamadas un 45%"],
     "responses":[""],
-    "function":"create_audio_whatsapp"
+    "function":"volumenInterpreter"
     },
+    {"tag":"brillo_pantalla",  
+    "patterns":["Sube el brillo", "Incrementa el brillo", "Aumenta la intensidad de brillo de la pantalla", "Sube el brillo de la pantalla", "Necesito que subas un 30% el brillo de la pantalla", "Podrias dame mas brillo a la pantalla porfavor", "Necesito que aumentes el brillo de la pantalla", "Hechame un favor y baja el brillo de la pantalla", "Mis ojos, mucha luz, bajame el brillo de la pantalla corre", "Me queman los ojos, baja el brillo de la pantalla", "Requiero que me bajes el brillo de la pantalla anda"],
+    "responses":["De acuerdo, enseguida", "De acuerdo", "Claro!", "Enseguida", "Me pongo", "Ahora lo hago"],
+    "function":"brilloInterpreter"
+    }
     
 ]
 
